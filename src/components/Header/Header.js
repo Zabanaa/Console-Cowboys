@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Header.css'
-import Background from './images/gist.gif'
+import Background from '../images/gist.gif'
 
 let headerStyles = {
     backgroundImage: `url(${Background})`
