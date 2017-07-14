@@ -3,6 +3,7 @@ import Header from './components/Header'
 import Nav from './components/Nav'
 import JobList from './components/JobList'
 import Footer from './components/Footer'
+import api from './utils/api'
 import './App.css'
 
 class App extends Component {
@@ -56,6 +57,12 @@ class App extends Component {
         }
     }
 
+    componentDidMount() {
+
+        api.getAllCharacters()
+            .then(jobs => console.log(jobs[0]))
+            .catch(err => console.error(err))
+    }
 
     render() {
 
