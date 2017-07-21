@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Logo from '../components/Logo'
 import Footer from '../components/Footer'
 
-class Terms extends Component {
+class Privacy extends Component {
 
     render() {
 
@@ -89,5 +89,5 @@ class Terms extends Component {
     }
 }
 
-export default Terms
+export default Privacy
 
