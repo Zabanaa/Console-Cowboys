@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
-import Link from './Link'
 
 class Nav extends Component {
+
+    filterByType(event) {
+        event.preventDefault()
+        return this.props.updateFilter(event.target.dataset.contractType)
+    }
 
     render() {
 
@@ -16,11 +20,27 @@ class Nav extends Component {
                     </h1>
 
                     <ul className="choose-job-type__links">
-                        <Link to="/" name="All" />
-                        <Link to="/full-time" name="Full Time" />
-                        <Link to="/freelance" name="Freelance" />
-                        <Link to="/internship" name="Internship" />
-                        <Link to="/remote" name="Remote" />
+
+                        <li>
+                           <a onClick={this.filterByType.bind(this)} href="/" data-contract-type="all">All</a>
+                        </li>
+
+                        <li>
+                           <a onClick={this.filterByType.bind(this)} href="/full-time" data-contract-type="full-time">Full Time</a>
+                        </li>
+
+                        <li>
+                           <a onClick={this.filterByType.bind(this)} href="/freelance" data-contract-type="freelance">Freelance</a>
+                        </li>
+
+                        <li>
+                           <a onClick={this.filterByType.bind(this)} href="/intership" data-contract-type="internship">Internship</a>
+                        </li>
+
+                        <li>
+                           <a onClick={this.filterByType.bind(this)} href="/remote" data-contract-type="remote">Remote</a>
+                        </li>
+
                     </ul>
 
                 </nav>
