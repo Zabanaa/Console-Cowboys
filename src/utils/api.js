@@ -2,10 +2,10 @@ import axios from 'axios'
 
 const getAllCharacters = () => {
 
-    let apiUri  = "https://wintermute.design/api/characters"
+    let apiUri  = "https://consolecowboys.club/jobs"
 
     return axios.get(apiUri)
-        .then( response => response.data.characters )
+        .then( response => response )
         .catch(err => console.error(err))
 }
 
