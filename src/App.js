@@ -11,57 +11,23 @@ class App extends Component {
     constructor() {
 
         super()
-
-        this.state = {
-
-            jobs: [
-
-                {
-                    link: "/",
-                    company_name: "Apple",
-                    job_title: "Senior Front End Engineer",
-                    job_location: "Cupertino, CA",
-                    contract_type: "Full Time",
-                    date_added: "1d"
-                },
-
-                {
-                    link: "/",
-                    company_name: "Microsoft",
-                    job_title: "Senior Systems Engineer",
-                    job_location: "Austin, TX",
-                    contract_type: "Freelance",
-                    date_added: "8d"
-                },
-
-                {
-                    link: "/",
-                    company_name: "Facebook",
-                    job_title: "Junior Data Scientist",
-                    job_location: "Palo Alto, CA",
-                    contract_type: "Internship",
-                    date_added: "11d"
-                },
-
-                {
-                    link: "/",
-                    company_name: "Digital Ocean",
-                    job_title: "Kubernetes Expert",
-                    job_location: "New York City, NY",
-                    contract_type: "Full Time",
-                    date_added: "19d"
-                },
-
-            ]
-
-        }
+        this.state = { jobs: [] }
     }
+
+    updateJobs(jobs) {
+
+        return this.setState({
+            jobs: jobs
+        })
+
+    }
+
 
     componentDidMount() {
 
         api.getAllCharacters()
-            .then(jobs => console.log(jobs[0]))
-            .catch(err => console.error(err))
+            .then(response => this.updateJobs(response.data.body.jobs))
+            .catch(err => console.error("something happened"))
     }
 
     render() {
@@ -70,7 +36,7 @@ class App extends Component {
 
             <div className="App">
                 <Header />
-                <Nav />
+                <Nav/>
                 <JobList jobs={this.state.jobs} />
                 <Footer />
             </div>
