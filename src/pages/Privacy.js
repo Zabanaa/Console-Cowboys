@@ -6,6 +6,8 @@ class Privacy extends Component {
 
     render() {
 
+        return(
+
         <div className="tos-wrapper">
 
             <div className="tos-inner">
@@ -79,13 +81,14 @@ class Privacy extends Component {
                     </p>
 
 
-                </section>
+                     </section>
 
-                <Footer />
+                     <Footer />
+
+                 </div>
 
             </div>
-
-        </div>
+        )
     }
 }
 

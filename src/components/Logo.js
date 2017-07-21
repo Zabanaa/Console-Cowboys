@@ -4,19 +4,20 @@ class Logo extends Component {
 
     render() {
 
-        <header className="post-job__header">
+        return (
+            <header className="post-job__header">
 
-            <a href="/" className="logo post-job__logo">
+                <a href="/" className="logo post-job__logo">
 
-                <p>
-                    <span>Console</span>
-                    <span>Cowboys</span>
-                </p>
+                    <p>
+                        <span>Console</span>
+                        <span>Cowboys</span>
+                    </p>
 
-            </a>
+                </a>
 
-        </header>
-
+            </header>
+        )
     }
 }
 
