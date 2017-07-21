@@ -22,12 +22,38 @@ class App extends Component {
 
     }
 
-
     componentDidMount() {
 
-        api.getAllCharacters()
+        api.getAllJobs()
             .then(response => this.updateJobs(response.data.body.jobs))
             .catch(err => console.error("something happened"))
+    }
+
+    updateFilter(contractType) {
+
+        if (contractType === "all") {
+
+            api.getAllJobs()
+                .then(response => this.updateJobs(response.data.body.jobs))
+                .catch(err => console.error("something happened"))
+
+        }
+
+        else if (contractType === "remote") {
+
+            api.getRemoteJobs()
+                .then(response => this.updateJobs(response.data.body.jobs))
+                .catch(err => console.error("something happened"))
+        }
+
+        else {
+
+            api.getJobByContractType(contractType)
+                .then(response => this.updateJobs(response.data.body.jobs))
+                .catch(err => console.error("something happened", err))
+
+        }
+
     }
 
     render() {
@@ -36,7 +62,7 @@ class App extends Component {
 
             <div className="App">
                 <Header />
-                <Nav/>
+                <Nav updateFilter={this.updateFilter.bind(this)}/>
                 <JobList jobs={this.state.jobs} />
                 <Footer />
             </div>
