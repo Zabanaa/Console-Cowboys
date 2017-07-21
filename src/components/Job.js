@@ -8,16 +8,16 @@ class Job extends Component {
 
             <li className="jobs__job">
 
-                <a className="job__link" href={this.props.details.link}>
+                <a className="job__link" href={this.props.details.listing_url}>
 
                     <div className="job__info-group">
 
                         <span className="job__company_name"> {this.props.details.company_name} </span>
-
-                        <span className="job__title"> {this.props.details.job_title} </span>
+                        are seeking a
+                        <span className="job__title"> {this.props.details.title} </span>
 
                         <span className="job__location">
-                            {this.props.details.job_location} - {this.props.details.contract_type}
+                            {this.props.details.location} - {this.props.details.contract_type}
                         </span>
 
                     </div>
