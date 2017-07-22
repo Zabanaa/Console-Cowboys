@@ -2,11 +2,46 @@ import React, { Component } from 'react'
 
 class PublishForm extends Component {
 
+    constructor() {
+
+        super()
+
+        this.state = {
+            checked: false
+        }
+
+    }
+
+    toggleCheckBox(e) {
+
+        return this.setState({
+            checked: e.target.checked
+        })
+
+    }
+
+    postJob(event) {
+        event.preventDefault()
+        let storage = window.localStorage
+
+        for (let key in this.refs) {
+
+            storage.setItem(key, this.refs[key].value)
+
+            // if (key === "is_remote") {
+            //    storage.setItem(key, this.state.checked)
+            // }
+        }
+
+        return window.location.path = "/preview"
+
+    }
+
     render() {
 
         return(
 
-            <form method="POST" className="post-job__form" name="post-job__form" >
+            <form method="POST" onSubmit={this.postJob.bind(this)} className="post-job__form" name="post-job__form" >
 
                 <div className="form-group">
 
@@ -16,7 +51,7 @@ class PublishForm extends Component {
 
                     <input  className="form-element"
                             type="text"
-                            name="job_title"
+                            ref="job_title"
                             placeholder="e.g: Senior DevOps Engineer"
                     />
 
@@ -27,34 +62,44 @@ class PublishForm extends Component {
                     <p className="post-job__label">Contract type</p>
 
                     <label className="label-contract-type">
-                        <input type="radio" name="contract_type" value="full-time" checked />
+                        <input type="radio" ref="contract_type" value="full-time" defaultChecked={true} />
                         <span className="label-text">Full Time</span>
                     </label>
 
                     <label className="label-contract-type">
-                        <input type="radio" name="contract_type" value="freelance" />
+                        <input type="radio" ref="contract_type" value="freelance" />
                         <span className="label-text">Freelance</span>
                     </label>
 
                     <label className="label-contract-type">
-                        <input type="radio" name="contract_type" value="contract" />
-                        <span className="label-text">Contract</span>
+                        <input type="radio" ref="contract_type" value="Internship" />
+                        <span className="label-text">Internship</span>
                     </label>
 
                 </div>
 
                 <div className="form-group">
                     <label className="post-job__label" htmlFor="company_name">Company name</label>
-                    <input className="form-element" type="text" name="company_name" placeholder="e.g: Google, Facebook" />
+                    <input className="form-element" type="text" ref="company_name" placeholder="e.g: Google, Facebook" />
                 </div>
 
                 <div className="form-group">
-                    <label className="post-job__label" htmlFor="link_to_listing">Link to job listing</label>
-                    <input className="form-element" type="text" name="link_to_listing" placeholder="eg: https://mycompany.com" />
+                    <label className="post-job__label" htmlFor="location">Location</label>
+                    <input className="form-element" type="text" ref="location" placeholder="Chicaco, IL - Paris, France ..." />
+                </div>
+
+                <div className="form-group">
+                    <label className="post-job__label" htmlFor="listing_url">Link to job listing</label>
+                    <input className="form-element" type="text" ref="listing_url" placeholder="eg: https://mycompany.com" />
                 </div>
 
                 <label className="post-job__label label-is-remote">
-                    <input className="form-element" name="is_remote" type="checkbox" />
+                    <input className="form-element"
+                            ref="is_remote"
+                            type="checkbox"
+                            checked={this.state.checked}
+                            onChange={this.toggleCheckBox.bind(this)}
+                    />
                     <span className="label-text">This job is open to remote applications</span>
                 </label>
 
