@@ -1,6 +1,25 @@
 import React, { Component } from 'react'
+import PreviewBox from './PreviewBox'
+
 
 class PreviewJob extends Component {
+
+    constructor() {
+
+        super()
+        let storage = window.localStorage
+        this.state = {
+
+            job: {
+                title: storage.getItem("job_title"),
+                company_name: storage.getItem("company_name"),
+                listing_url: storage.getItem("listing_url"),
+                is_remote: storage.getItem("is_remote"),
+                contract_type: storage.getItem("contract_type"),
+                location: storage.getItem("location"),
+            }
+        }
+    }
 
     render() {
 
@@ -8,31 +27,7 @@ class PreviewJob extends Component {
 
             <div>
 
-                <section className="job-preview">
-
-                    <h2 className="job-preview__listing">Listing Preview</h2>
-
-                    <div className="job-preview__job jobs__job">
-
-                        <a href="/" target="_blank" className="job__link">
-
-                            <div className="job__info-group">
-
-                                <span className="job__company_name">Apple</span> are seeking a
-                                <span className="job__title"> Senior Dev</span>
-                                <span className="job__location">Cupertino, CA - Freelance </span>
-
-                            </div>
-
-                            <div className="job__date">
-                                <span>New</span>
-                            </div>
-
-                        </a>
-
-                    </div>
-
-                </section>
+                <PreviewBox job={this.state.job} />
 
                 <section className="job-payment">
 
