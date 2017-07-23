@@ -3,7 +3,7 @@ import Header from './components/Header'
 import Nav from './components/Nav'
 import JobList from './components/JobList'
 import Footer from './components/Footer'
-import api from './utils/api'
+import Api from './utils/api'
 import './App.css'
 
 class App extends Component {
@@ -24,7 +24,7 @@ class App extends Component {
 
     componentDidMount() {
 
-        api.getAllJobs()
+        Api.getAllJobs()
             .then(response => this.updateJobs(response.data.body.jobs))
             .catch(err => console.error("something happened"))
     }
@@ -33,7 +33,7 @@ class App extends Component {
 
         if (contractType === "all") {
 
-            api.getAllJobs()
+            Api.getAllJobs()
                 .then(response => this.updateJobs(response.data.body.jobs))
                 .catch(err => console.error("something happened"))
 
@@ -41,14 +41,14 @@ class App extends Component {
 
         else if (contractType === "remote") {
 
-            api.getRemoteJobs()
+            Api.getRemoteJobs()
                 .then(response => this.updateJobs(response.data.body.jobs))
                 .catch(err => console.error("something happened"))
         }
 
         else {
 
-            api.getJobByContractType(contractType)
+            Api.getJobByContractType(contractType)
                 .then(response => this.updateJobs(response.data.body.jobs))
                 .catch(err => console.error("something happened", err))
 
