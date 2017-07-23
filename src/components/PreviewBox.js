@@ -1,6 +1,14 @@
 import React, { Component } from 'react'
 
+let styles = { marginLeft: 8 + "px" }
+
 class PreviewBox extends Component {
+
+    displayContractType(string) {
+
+        let capitalizedStr = string.charAt(0).toUpperCase() + string.slice(1)
+        return capitalizedStr.replace("-", " ")
+    }
 
     render() {
 
@@ -18,14 +26,14 @@ class PreviewBox extends Component {
 
                             <span className="job__company_name">
                                 {this.props.job.company_name}
-                            </span> are seeking a
+                            </span>   are seeking a
 
-                            <span className="job__title">
-                                {this.props.job.title}
+                            <span className="job__title" style={styles}>
+                                 {this.props.job.title}
                             </span>
 
                             <span className="job__location">
-                                {this.props.job.location} - {this.props.job.contract_type}
+                                {this.props.job.location} - {this.displayContractType(this.props.job.contract_type)}
                             </span>
 
                         </div>
