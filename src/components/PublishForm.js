@@ -7,9 +7,16 @@ class PublishForm extends Component {
         super()
 
         this.state = {
-            checked: false
+            checked: false,
+            contractType: "full-time"
         }
 
+    }
+
+    updateContractType(e) {
+        return this.setState({
+            contractType: e.target.value
+        })
     }
 
     toggleCheckBox(e) {
@@ -28,13 +35,18 @@ class PublishForm extends Component {
 
             storage.setItem(key, this.refs[key].value)
 
-            // if (key === "is_remote") {
-            //    storage.setItem(key, this.state.checked)
-            // }
+            if (key === "is_remote") {
+               storage.setItem(key, this.refs[key].checked)
+            }
+
+            if (key === "contract_type") {
+                storage.setItem(key, this.state.contractType)
+            }
         }
 
-        return window.location.path = "/preview"
+        console.log(storage)
 
+        return window.location.path = "/preview"
     }
 
     render() {
@@ -62,17 +74,18 @@ class PublishForm extends Component {
                     <p className="post-job__label">Contract type</p>
 
                     <label className="label-contract-type">
-                        <input type="radio" ref="contract_type" value="full-time" defaultChecked={true} />
+                        <input type="radio" ref="contract_type" value="full-time" checked={this.state.contractType === "full-time"} onChange={this.updateContractType.bind(this)}/>
                         <span className="label-text">Full Time</span>
                     </label>
 
                     <label className="label-contract-type">
-                        <input type="radio" ref="contract_type" value="freelance" />
+
+                        <input type="radio" ref="contract_type" value="freelance" checked={this.state.contractType === "freelance"} onChange={this.updateContractType.bind(this)} />
                         <span className="label-text">Freelance</span>
                     </label>
 
                     <label className="label-contract-type">
-                        <input type="radio" ref="contract_type" value="Internship" />
+                        <input type="radio" ref="contract_type" value="internship" checked={this.state.contractType === "internship"} onChange={this.updateContractType.bind(this)} />
                         <span className="label-text">Internship</span>
                     </label>
 
