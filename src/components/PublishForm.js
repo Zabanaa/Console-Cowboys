@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 
 class PublishForm extends Component {
 
@@ -42,11 +43,13 @@ class PublishForm extends Component {
             if (key === "contract_type") {
                 storage.setItem(key, this.state.contractType)
             }
+
         }
 
-        console.log(storage)
 
-        return window.location.path = "/preview"
+        // redirect users in reactRouterV4, taken from
+        // https://stackoverflow.com/questions/42701129/how-to-push-to-history-in-react-router-v4
+        return this.props.history.push("/preview")
     }
 
     render() {
@@ -125,4 +128,4 @@ class PublishForm extends Component {
     }
 }
 
-export default PublishForm
+export default withRouter(PublishForm)
