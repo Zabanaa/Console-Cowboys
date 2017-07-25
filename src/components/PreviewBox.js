@@ -6,7 +6,7 @@ class PreviewBox extends Component {
 
     displayContractType(string) {
 
-        let capitalizedStr = string.charAt(0).toUpperCase() + string.slice(1)
+        let capitalizedStr = string.charAt(0).toUpperCase() + string.splice(1)
         return capitalizedStr.replace("-", " ")
     }
 
@@ -33,7 +33,7 @@ class PreviewBox extends Component {
                             </span>
 
                             <span className="job__location">
-                                {this.props.job.location} - {this.displayContractType(this.props.job.contract_type)}
+                                {this.props.job.location} - {this.props.job.contract_type}
                             </span>
 
                         </div>
