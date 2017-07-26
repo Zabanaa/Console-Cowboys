@@ -5,6 +5,8 @@ import {
     CardExpiryElement,
     CardCVCElement } from 'react-stripe-elements'
 
+import './styles/CheckoutForm.sass'
+
 class CheckoutForm extends Component {
 
     onSubmit = event => {
@@ -19,7 +21,7 @@ class CheckoutForm extends Component {
 
         return(
 
-            <form onSubmit={this.onSubmit}>
+            <form className="mycheckoutform" onSubmit={this.onSubmit}>
 
                 <div className="form-group">
 
