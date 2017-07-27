@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Api from '../utils/api'
 import {
     injectStripe,
     CardNumberElement,
@@ -7,6 +8,7 @@ import {
 
 import './styles/CheckoutForm.sass'
 
+
 class CheckoutForm extends Component {
 
     onSubmit = event => {
@@ -14,7 +16,7 @@ class CheckoutForm extends Component {
         event.preventDefault()
 
         this.props.stripe.createToken()
-            .then( ({token}) => console.log(token))
+            .then( ({token}) => Api.submitJob(token.id) )
     }
 
     render() {
@@ -26,17 +28,17 @@ class CheckoutForm extends Component {
                 <div className="form-group">
 
                     <label>
-                        Card Number
+                        <span>Card Number</span>
                         <CardNumberElement />
                     </label>
 
                     <label>
-                        Expiry Date
+                        <span>Expiry Date</span>
                         <CardExpiryElement />
                     </label>
 
                     <label>
-                        CVC
+                        <span>CVC</span>
                         <CardCVCElement />
                     </label>
 
@@ -72,7 +74,6 @@ class CheckoutForm extends Component {
                     <button className="confirm-payment">Confirm Payment</button>
 
                 </div>
-
 
             </form>
 

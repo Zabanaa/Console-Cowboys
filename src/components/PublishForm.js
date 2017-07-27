@@ -34,6 +34,11 @@ class PublishForm extends Component {
 
         for (let key in this.refs) {
 
+            if (this.refs[key].value === "") {
+                alert("All fields are required")
+                return this.props.history.push("/publish")
+            }
+
             storage.setItem(key, this.refs[key].value)
 
             if (key === "is_remote") {
@@ -45,7 +50,6 @@ class PublishForm extends Component {
             }
 
         }
-
 
         // redirect users in reactRouterV4, taken from
         // https://stackoverflow.com/questions/42701129/how-to-push-to-history-in-react-router-v4
@@ -68,6 +72,7 @@ class PublishForm extends Component {
                             type="text"
                             ref="job_title"
                             placeholder="e.g: Senior DevOps Engineer"
+
                     />
 
                 </div>
@@ -95,12 +100,12 @@ class PublishForm extends Component {
                 </div>
 
                 <div className="form-group">
-                    <label className="post-job__label" htmlFor="company_name">Company name</label>
+                    <label  className="post-job__label" htmlFor="company_name">Company name</label>
                     <input className="form-element" type="text" ref="company_name" placeholder="e.g: Google, Facebook" />
                 </div>
 
                 <div className="form-group">
-                    <label className="post-job__label" htmlFor="location">Location</label>
+                    <label  className="post-job__label" htmlFor="location">Location</label>
                     <input className="form-element" type="text" ref="location" placeholder="Chicaco, IL - Paris, France ..." />
                 </div>
 
@@ -115,6 +120,7 @@ class PublishForm extends Component {
                             type="checkbox"
                             checked={this.state.checked}
                             onChange={this.toggleCheckBox.bind(this)}
+
                     />
                     <span className="label-text">This job is open to remote applications</span>
                 </label>
