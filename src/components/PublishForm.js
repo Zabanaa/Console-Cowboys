@@ -70,7 +70,7 @@ class PublishForm extends Component {
 
                     <input  className="form-element"
                             type="text"
-                            ref="job_title"
+                            ref="title"
                             placeholder="e.g: Senior DevOps Engineer"
 
                     />

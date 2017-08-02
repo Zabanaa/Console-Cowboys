@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import Api from '../utils/api'
 import {
     injectStripe,
@@ -8,22 +9,49 @@ import {
 
 import './styles/CheckoutForm.sass'
 
-
 class CheckoutForm extends Component {
+
+    constructor() {
+
+        super()
+
+        this.state = {
+            jobIsSubmitted: false
+        }
+    }
 
     onSubmit = event => {
 
         event.preventDefault()
 
         this.props.stripe.createToken()
-            .then( ({token}) => Api.submitJob(token.id) )
+            .then( ({token}) =>
+                Api.submitJob(token.id)
+            )
+            .then( response => {
+
+                if (response.status === 201) {
+
+                    window.localStorage.clear()
+                    this.setState({jobIsSubmitted: true})
+                    console.log("request went through")
+                }
+            })
     }
 
     render() {
 
+        let thankYouMessage
+
+        if (this.state.jobIsSubmitted) {
+
+            thankYouMessage = "Thanks for submitting your job !"
+        }
+
         return(
 
             <form className="mycheckoutform" onSubmit={this.onSubmit}>
+
 
                 <div className="form-group">
 
@@ -75,10 +103,12 @@ class CheckoutForm extends Component {
 
                 </div>
 
+                <span className="thank-you-msg">{thankYouMessage}</span>
+
             </form>
 
         )
     }
 }
 
-export default injectStripe(CheckoutForm)
+export default withRouter(injectStripe(CheckoutForm))

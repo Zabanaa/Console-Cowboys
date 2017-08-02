@@ -1,10 +1,11 @@
 import axios from 'axios'
+import secretKey from './secret'
 
 class Api {
 
     constructor() {
-
-        this.apiURI = "https://consolecowboys.club/jobs"
+        // this.apiURI = "https://consolecowboys.club/jobs"
+        this.apiURI = "http://consolecowboys.dev:8081/jobs"
     }
 
     getAllJobs() {
@@ -31,20 +32,23 @@ class Api {
     submitJob(stripeToken) {
 
         const storage       = window.localStorage
-        const storageKeys   = Object.keys(storage)
-        let jobDetails      = new FormData()
-
-        for (var i = 0; i < storageKeys.length; i++) {
-            jobDetails.append(storageKeys[i], storage.getItem(storageKeys[i]))
-        }
-
-        // append the token to the form data object then send the fucker
         storage.setItem("stripe_token", stripeToken)
-        return axios.post(`${this.apiURI}/jobs/checkout`, jobDetails)
-            .then( response => console.log(response) )
-            .catch( err => console.error(err) )
-    }
 
+        const jobDetails    = JSON.stringify(storage)
+
+
+        return axios({
+            method: "POST",
+            url: `${this.apiURI}/checkout`,
+            data: JSON.stringify(jobDetails),
+            headers: {
+                "Content-Type": "application/json",
+                "X-Secret-Key": secretKey
+            }
+        })
+        .then( response => response )
+        .catch( err => console.error(err) )
+    }
 }
 
 export default new Api()
